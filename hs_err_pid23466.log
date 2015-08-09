@@ -1,0 +1,65 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0x7) at pc=0xb766e54a, pid=23466, tid=1580546880
+#
+# JRE version: OpenJDK Runtime Environment (7.0_79-b14) (build 1.7.0_79-b14)
+# Java VM: OpenJDK Server VM (24.79-b02 mixed mode linux-x86 )
+# Derivative: IcedTea 2.5.5
+# Distribution: Ubuntu 14.04 LTS, package 7u79-2.5.5-0ubuntu0.14.04.2
+# Problematic frame:
+# C  [libc.so.6+0x12c54a]
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please include
+# instructions on how to reproduce the bug and visit:
+#   http://icedtea.classpath.org/bugzilla
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x5dac3400):  JavaThread "Daemon worker Thread 15" [_thread_in_vm, id=30839, stack(0x5e303000,0x5e354000)]
+
+siginfo:si_signo=SIGBUS: si_errno=0, si_code=2 (BUS_ADRERR), si_addr=0xa6296000
+
+Registers:
+EAX=0x00000000, EBX=0xb76ec000, ECX=0xffffff88, EDX=0xa6295fd0
+ESP=0x5e34ecf8, EBP=0x00000024, ESI=0xa6295fc8, EDI=0x632c5f48
+EIP=0xb766e54a, EFLAGS=0x00010287, CR2=0xa6296000
+
+Top of Stack: (sp=0x5e34ecf8)
+0x5e34ecf8:   b70d5000 b6d053b2 a6295fd0 00000000
+0x5e34ed08:   00000088 b6a7f357 5e34ed28 b3bade5e
+0x5e34ed18:   5e8def44 b6cf2f98 5e34edf0 b330351a
+0x5e34ed28:   5e34ed98 b6cf2f98 b3302a48 b330351a
+0x5e34ed38:   00000000 b70d5000 5e8def38 5dac3400
+0x5e34ed48:   b7500cd0 b6b51c76 632c5f50 00000020
+0x5e34ed58:   5dac3400 5dac3400 5e34ee00 b3755354
+0x5e34ed68:   5e8def40 a6295eb8 5e8deed4 5e3517cc 
+
+Instructions: (pc=0xb766e54a)
+0xb766e52a:   0f 83 90 00 00 00 81 e9 80 00 00 00 81 e9 80 00
+0xb766e53a:   00 00 66 0f 7f 02 66 0f 7f 42 10 66 0f 7f 42 20
+0xb766e54a:   66 0f 7f 42 30 66 0f 7f 42 40 66 0f 7f 42 50 66
+0xb766e55a:   0f 7f 42 60 66 0f 7f 42 70 8d 92 80 00 00 00 72 
+
+Register to memory mapping:
+
+EAX=0x00000000 is an unknown value
+EBX=0xb76ec000: <offset 0x1aa000> in /lib/i386-linux-gnu/libc.so.6 at 0xb7542000
+ECX=0xffffff88 is an unknown value
+EDX=0xa6295fd0 is an unknown value
+ESP=0x5e34ecf8 is pointing into the stack for thread: 0x5dac3400
+EBP=0x00000024 is an unknown value
+ESI=0xa6295fc8 is an oop
+org.gradle.api.internal.AbstractClassGenerator$MethodSignature 
+ - klass: 'org/gradle/api/internal/AbstractClassGenerator$MethodSignature'
+EDI=0x632c5f48 is an oop
+{object array class} 
+ - klass: {other class}
+
+
+Stack: [0x5e303000,0x5e354000],  sp=0x5e34ecf8,  free space=303k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libc.so.6+0x12c54a]

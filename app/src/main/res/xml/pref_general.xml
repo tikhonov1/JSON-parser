@@ -1,0 +1,168 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="sort_deep"
+        android:title="Вложенность сортировки"
+        android:defaultValue="1"
+        android:entries="@array/pref_numbers"
+        android:entryValues="@array/pref_numbers"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+    <PreferenceCategory
+        android:key="categ1"
+        android:title="Уровень 1">
+
+        <ListPreference
+            android:key="criter1"
+            android:title="Критерий сортировки (1)"
+            android:defaultValue="getName"
+            android:summary="Имя"
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
+
+        <CheckBoxPreference
+            android:key="chb1"
+            android:title="В обратном порядке">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="categ2"
+        android:title="Уровень 2">
+
+    <ListPreference
+        android:key="criter2"
+        android:title="Критерий сортировки (2)"
+        android:defaultValue=""
+        android:summary=""
+        android:entries="@array/pref_example_list_titles"
+        android:entryValues="@array/pref_example_list_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+    <CheckBoxPreference
+        android:key="chb2"
+        android:title="В обратном порядке">
+    </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="categ3"
+        android:title="Уровень 3">
+
+        <ListPreference
+            android:key="criter3"
+            android:title="Критерий сортировки (3)"
+            android:defaultValue=""
+            android:summary=""
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
+        <CheckBoxPreference
+            android:key="chb3"
+            android:title="В обратном порядке">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="categ4"
+        android:title="Уровень 4">
+
+        <ListPreference
+            android:key="criter4"
+            android:title="Критерий сортировки (4)"
+            android:defaultValue=""
+            android:summary=""
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
+
+        <CheckBoxPreference
+            android:key="chb4"
+            android:title="В обратном порядке">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        android:key="categ5"
+        android:title="Уровень 5">
+
+    <ListPreference
+        android:key="criter5"
+        android:title="Критерий сортировки (5)"
+        android:defaultValue=""
+        android:summary=""
+        android:entries="@array/pref_example_list_titles"
+        android:entryValues="@array/pref_example_list_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:layout_margin="260dp"
+        />
+
+        <CheckBoxPreference
+            android:key="chb5"
+            android:title="В обратном порядке"
+            >
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        android:key="categ6"
+        android:title="Уровень 6">
+
+        <ListPreference
+            android:key="criter6"
+            android:title="Критерий сортировки (6)"
+            android:defaultValue=""
+            android:summary=""
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
+
+            <CheckBoxPreference
+                android:key="chb6"
+                android:title="В обратном порядке">
+            </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="categ7"
+        android:title="Уровень 7">
+
+        <ListPreference
+            android:key="criter7"
+            android:title="Критерий сортировки (7)"
+            android:defaultValue=""
+            android:summary=""
+            android:entries="@array/pref_example_list_titles"
+            android:entryValues="@array/pref_example_list_values"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null" />
+
+        <CheckBoxPreference
+            android:key="chb7"
+            android:title="В обратном порядке">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
