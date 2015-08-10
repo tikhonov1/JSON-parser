@@ -34,7 +34,7 @@ public class MainActivity extends SherlockFragmentActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_recycler_view);
+        setContentView(R.layout.main_layout);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -58,9 +58,12 @@ public class MainActivity extends SherlockFragmentActivity {
             new SliderAdapter(this, items)
         );
 
+        //лисенер на нажатие в Слайдинг-меню
         ((ListView) findViewById(R.id.sidemenu)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //меняет фрагмент на выбранный
                 changeFragment(position);
                 menu.showContent();
             }
@@ -70,18 +73,23 @@ public class MainActivity extends SherlockFragmentActivity {
     }
 
 
+    //если нажали кнопку Назад
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //если Слайдинг меню было открыто, то закрываем его
             if(menu.isMenuShowing()){
                 menu.toggle(true);
                 return false;
             }
+            //если мы сейчас НЕ на Главном экране (на котором Recyclerview), то переключаемя на него
             if(!isInMainScreen){
                 isInMainScreen=true;
                 showFragment(new BlankFragment());
                 return false;
-            } else{
+
+            } else{ //если мы на Главном экране нажали Назад, выходим из приложения
+
                 System.exit(0);
                 return false;
             }
@@ -89,6 +97,7 @@ public class MainActivity extends SherlockFragmentActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //меняет фрагмент на выбранный
     private void changeFragment(int position) {
         switch (position) {
             case 0:
@@ -109,13 +118,16 @@ public class MainActivity extends SherlockFragmentActivity {
 
         }
     }
-    private  void showFragment(Fragment currentFragment) {
+
+    //показывает выбранный фрагмент
+    private void showFragment(Fragment currentFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, currentFragment)
                 .commit();
     }
 
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -126,6 +138,7 @@ public class MainActivity extends SherlockFragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //открывает или закрывает меню
     public void menuToggle(){
         if(menu.isMenuShowing())
             menu.showContent();
@@ -134,6 +147,7 @@ public class MainActivity extends SherlockFragmentActivity {
     }
 
 
+    //адаптер для Слайдинг-меню, устанавливает текст элементов и иконки для этих элементов
     public class SliderAdapter extends ArrayAdapter<String> {
         private final Context context;
         private final String[] values;

@@ -71,7 +71,7 @@ class PersonComparator implements Comparator<Person> {
         if(methodName.equals(""))
             return 0;
         try {
-            //устанавливаем поле (Method m), по которому будем производить сравнение
+            //устанавливаем поле (т.е. соответствующий ему Method m), по которому будем производить сравнение
             m = p1.getClass().getMethod(methodName, new Class[]{});
         } catch (Exception e){
             Log.d("method","exception1");
