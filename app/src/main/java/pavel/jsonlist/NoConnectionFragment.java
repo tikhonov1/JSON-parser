@@ -23,7 +23,7 @@ import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-
+//Фрагмент, показывающийся при неудавшейся попытке загрузить persons.json
 public class NoConnectionFragment extends SherlockFragment {
 
     SharedPreferences sp;

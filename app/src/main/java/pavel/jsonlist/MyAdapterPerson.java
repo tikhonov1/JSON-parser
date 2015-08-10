@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 
 @SuppressLint("InflateParams")
+
+//адаптер для RecyclerView
 public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHolder>  {
 
 
@@ -23,7 +25,7 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
     private static ArrayList<Person> nonGrata;
     public static Context C;
 
-
+    //в конструктор поступают массив людей, загруженных из файла, а также массив людей, которые были удалены
     public MyAdapterPerson(ArrayList<Person> people,ArrayList<Person> nonGrata) {
         this.people = people;
         this.nonGrata=nonGrata;
@@ -32,7 +34,6 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
 
     @Override
     public MyAdapterPerson.ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-
         C=parent.getContext();
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, null);
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
@@ -52,7 +53,7 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
         viewHolder.personAddress.setText(people.get(position).getAddress());
         viewHolder.personRegistered.setText(people.get(position).getRegistered());
 
-
+        //устанавливает тексты для полей CardView внутри RecyclerView
         if(people.get(position).getAge()==-1)
             viewHolder.personAge.setText("Age: "+C.getResources().getString(R.string.not_available));
         else viewHolder.personAge.setText("Age: "+people.get(position).getAge());
@@ -67,6 +68,8 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
 
         viewHolder.personPhoto.buildDrawingCache();
 
+        //асинхронно загружает изображения для данной Персоны и устанавливает его в ImageView,
+        // если же оно уже было загружено раньше, то устанавливает его без загрузки
         if(people.get(position).getPictureBitmap()==null) {
             DownloadPicture task=new DownloadPicture();
             task.execute(new SetPicture(viewHolder.personPhoto, people.get(position)));
@@ -74,6 +77,7 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
         else viewHolder.personPhoto.setImageBitmap(people.get(position).getPictureBitmap()
         );
 
+        //при долгом нажатии на CardView для данной Персоны, удаляет её
         viewHolder.cv.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -110,6 +114,7 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
 
+            //устанавливает соответствие с переменными и полями в CardView
             cv=(CardView)itemView.findViewById(R.id.cv);
 
             personName = (TextView)itemView.findViewById(R.id.name);

@@ -3,10 +3,8 @@ package pavel.jsonlist;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 
@@ -39,6 +37,7 @@ public class MainActivity extends SherlockFragmentActivity {
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //делает Слайдинг меню
         menu = new SlidingMenu(this);
         menu.setMode(SlidingMenu.LEFT);
         menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -47,6 +46,7 @@ public class MainActivity extends SherlockFragmentActivity {
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
+        //при запуске программы устанавливает фрейм на
         if(isFirst)
             showFragment(new BlankFragment());
 

@@ -43,19 +43,19 @@ import com.actionbarsherlock.app.SherlockFragment;
 public class BlankFragment extends SherlockFragment {
     private ActionBar actionBar;
     private static RecyclerView rv;
-
     private static String LOG_TAG = "my_log";
-    private static ArrayList<Person> arrayOfPeopleArrayList=new ArrayList<>();
-
     private SharedPreferences sp;
-
     static String strJsonStatic;
-
     static ProgressBar progressBar;
 
+    //ArrayList людей, которых пользователь удалил
     public static ArrayList<Person> nonGrataPersonas=new ArrayList<>();
 
+    //массив людей, загруженных из файла из интеренета
+    private static ArrayList<Person> arrayOfPeopleArrayList=new ArrayList<>();
 
+
+    //берёт из SharedPreferences настройки Названия критериев сортировки
     ArrayList<String> getSortByPreference(){
         ArrayList<String> sortByPref=new ArrayList<>();
 
@@ -70,6 +70,7 @@ public class BlankFragment extends SherlockFragment {
         return sortByPref;
     }
 
+    //берёт из SharedPreferences настройки Порядок сортировки этих критериев
     ArrayList<Boolean> getSortOrderPreference(){
         ArrayList<Boolean> sortOrderPref=new ArrayList<>();
 
@@ -106,6 +107,7 @@ public class BlankFragment extends SherlockFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(layoutManager);
 
+        //если мы уже загрузили всё из файла, то больше не загружать, сразу создать RecyclerView
         if(arrayOfPeopleArrayList.size()==0)
             new ParseTask().execute();
         else createRV();
@@ -126,6 +128,7 @@ public class BlankFragment extends SherlockFragment {
             BufferedReader reader;
             String resultJson = "";
 
+            //загружаем файл и парсим его в arrayOfPeopleArrayList из объектов <Person>
             try {
                 Log.d(LOG_TAG, "connect1");
                 URL url = new URL("http://109.120.187.164:81/people.json");
@@ -152,6 +155,8 @@ public class BlankFragment extends SherlockFragment {
                 urlConnection.disconnect();
             } catch(Exception e){
                 e.printStackTrace();
+
+                //если произошла ошибка загрузки, перекидывает на NoConnectionFragment
                 if(arrayOfPeopleArrayList.size()==0)
                     showFragment(new NoConnectionFragment(sp));
             }
@@ -160,6 +165,7 @@ public class BlankFragment extends SherlockFragment {
             return resultJson;
         }
 
+        //показывает выбранный фрагмент
         private  void showFragment(Fragment currentFragment) {
             FragmentManager fragmentManager = getFragmentManager();
             try {
@@ -266,6 +272,10 @@ public class BlankFragment extends SherlockFragment {
             createRV();
         }
     }
+
+    //создаёт RecyclerView из arrayOfPeopleArrayList:
+    //  1 столбец на вертикальную ориентацию
+    //  2 столбца на горизонтальную
     void createRV(){
         try {
             GridLayoutManager llm;

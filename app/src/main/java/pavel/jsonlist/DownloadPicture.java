@@ -14,12 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-
-public class DownloadPicture extends AsyncTask<SetPicture/*ImageView*/, Void, Bitmap> {
-
-
+//загружает изображения из интернета и устанавливает их в ImageView в CardView в RecyclerView
+public class DownloadPicture extends AsyncTask<SetPicture, Void, Bitmap> {
     ImageView imageView = null;
-
 
     @Override
     protected Bitmap doInBackground(SetPicture... setPictures) {

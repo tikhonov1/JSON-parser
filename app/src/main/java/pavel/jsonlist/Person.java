@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-/**
- * Created by pavel on 06.08.15.
- */
+//
 public class Person {
     private String _id;
     private boolean isActive;
@@ -31,8 +29,6 @@ public class Person {
     }
 
 
-
-
     public Person(){
         this._id="";
         this.isActive =false;
@@ -47,8 +43,6 @@ public class Person {
 
         this.pictureBitmap =null;
         this.finished=false;
-
-
     }
 
     public Person(String _id, boolean isActive, String picture, int age, String name,
@@ -81,22 +75,6 @@ public class Person {
     @Override
     public int hashCode() {
         return _id.hashCode();
-    }
-
-    /*public void setPictureBitmap(Bitmap pictureBitmap) {
-        this.pictureBitmap = pictureBitmap;
-    }*/
-
-    public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
-    }
-
-    public String get_id() {
-        return _id;
     }
 
     public boolean getIsActive() {
