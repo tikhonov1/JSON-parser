@@ -43,7 +43,7 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
 
-
+        //устанавливает тексты для полей CardView внутри RecyclerView
         viewHolder.personPhoto.setImageResource(R.drawable.empty);
         viewHolder.personName.setText(people.get(position).getName());
 
@@ -53,7 +53,6 @@ public class MyAdapterPerson extends RecyclerView.Adapter<MyAdapterPerson.ViewHo
         viewHolder.personAddress.setText(people.get(position).getAddress());
         viewHolder.personRegistered.setText(people.get(position).getRegistered());
 
-        //устанавливает тексты для полей CardView внутри RecyclerView
         if(people.get(position).getAge()==-1)
             viewHolder.personAge.setText("Age: "+C.getResources().getString(R.string.not_available));
         else viewHolder.personAge.setText("Age: "+people.get(position).getAge());
