@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-//загружает изображения из интернета и устанавливает их в ImageView в CardView в RecyclerView
+//асинхронно загружает изображение из интернета и устанавливает его в
+// 1. в ImageView внутри CardView внутри RecyclerView
+// 2. в Bitmap переменную pictureBitmap в экземпляре класса Person
 public class DownloadPicture extends AsyncTask<SetPicture, Void, Bitmap> {
     ImageView imageView = null;
 
@@ -37,12 +39,10 @@ public class DownloadPicture extends AsyncTask<SetPicture, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap result) {
         if(result==null) return;
-
-
         try {
             imageView.setImageBitmap(result);
         }catch (Exception e){
-            Log.d("Exception","in_AsyncTask");
+            e.printStackTrace();
         }
     }
 

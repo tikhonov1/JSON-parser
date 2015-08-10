@@ -18,7 +18,6 @@ public class Person {
     private String registered;
 
     public Bitmap pictureBitmap;
-    private boolean finished;
 
     public Bitmap getPictureBitmap() {
         return pictureBitmap;
@@ -42,7 +41,7 @@ public class Person {
         this.registered ="N\\A";
 
         this.pictureBitmap =null;
-        this.finished=false;
+
     }
 
     public Person(String _id, boolean isActive, String picture, int age, String name,

@@ -2,6 +2,7 @@ package pavel.jsonlist;
 
 import android.widget.ImageView;
 
+//класс, нужный для передачи Person и ImageView из MyAdapterPerson в DownloadPicture для загрузки изображения
 public class SetPicture {
     ImageView imageView;
     Person person;
