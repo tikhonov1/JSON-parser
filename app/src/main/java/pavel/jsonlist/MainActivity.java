@@ -20,6 +20,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+//далее, "Критерий" - установленный пользователем критерий, по которому будет вестись сортировка
+//т.е. "Имя" или "Возраст" или "Адрес" и т.д.
+
 public class MainActivity extends SherlockFragmentActivity {
     private static boolean isInMainScreen=true;
     public static boolean isFirst=true;

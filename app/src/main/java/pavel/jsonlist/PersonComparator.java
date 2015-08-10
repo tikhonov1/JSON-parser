@@ -6,6 +6,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+//далее, "Критерий" - установленный пользователем критерий, по которому будет вестись сортировка
+//т.е. "Имя" или "Возраст" или "Адрес" и т.д.
+
+
+//компаратор, который сравнивает Person'ы в зависимости от Настроек, установленных пользователем
 class PersonComparator implements Comparator<Person> {
 
     ArrayList<String> sortBy=new ArrayList<>();
@@ -21,8 +26,12 @@ class PersonComparator implements Comparator<Person> {
         else this.sortOrder = sortOrder;
     }
 
+
     @Override
     public int compare(Person x, Person y) {
+
+        //в зависимости от порядка Критериев, установленных в Настройках производит сравнение по
+        //всем этим Критериям
         if (compareByMethod(x,y,sortBy.get(0))!=0){
             if(sortOrder.get(0))
                 return compareByMethod(x, y, sortBy.get(0));
@@ -54,17 +63,23 @@ class PersonComparator implements Comparator<Person> {
         }
     }
 
+    //возвращает результат сравнения двух Person по указанному полю (определяется названием метода)
+    //"поле" - т.е. "Имя" или "Пол" или "Телефон" и т.д.
+    //по названию метода, т.е., например для "Имени" - "getName", для "Возраста" - "getAge"
     private static int compareByMethod(Person p1, Person p2, String methodName){
         Method m=null;
         if(methodName.equals(""))
             return 0;
         try {
+            //устанавливаем поле (Method m), по которому будем производить сравнение
             m = p1.getClass().getMethod(methodName, new Class[]{});
         } catch (Exception e){
             Log.d("method","exception1");
         }
 
         try {
+            //сравнение по указанному полю, invoke вызывает соответствующий метод,
+            // который возращает значение поля, например для "getName" вернётся "Василий", "getAge" - 28
             return compareTo(m.invoke(p1, new Object[]{}),m.invoke(p2, new Object[]{}));
         } catch (Exception e){
             Log.d("method","exception2");
@@ -72,6 +87,7 @@ class PersonComparator implements Comparator<Person> {
         return 0;
     }
 
+    //возвращает результат сравнения для Boolean, Integer или String
     private static <T> int compareTo(T a,T b) throws Exception{
         if(a instanceof Integer){
             Integer aI=(Integer) a;
