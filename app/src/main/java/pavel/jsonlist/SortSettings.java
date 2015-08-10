@@ -13,7 +13,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+
+//далее, "Критерий" - установленный пользователем критерий, по которому будет вестись сортировка
+//т.е. "Имя" или "Возраст" или "Адрес" и т.д.
+//
+//"Уровень" сортировки - означает, по какому Критерию будет отсортированно сначала, по которому после
+
+
+//Фрейм с настройками сортировки
 public class SortSettings extends android.support.v4.preference.PreferenceFragment {
+
+
 
     private static ArrayList<Preference> criteriesArray;
     private static ArrayList<Preference> chbArray;
@@ -30,6 +40,7 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
 
         usedCriteries.clear();
 
+        //соответсвие между выводимым названием и реальным методом в классе Person
         hashMap.put("getName", "Имя");
         hashMap.put("getAge","Возраст");
         hashMap.put("getGender","Пол");
@@ -43,6 +54,8 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         criteriesArray=new ArrayList<>();
         chbArray=new ArrayList<>();
 
+
+        //добавление в массив Критериев настройки из layout'а
         criteriesArray.add((Preference) findPreference("criter1"));
         criteriesArray.add((Preference) findPreference("criter2"));
         criteriesArray.add((Preference) findPreference("criter3"));
@@ -51,6 +64,7 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         criteriesArray.add((Preference) findPreference("criter6"));
         criteriesArray.add((Preference) findPreference("criter7"));
 
+        //то же самое для Порядка сортировки
         chbArray.add((Preference) findPreference("chb1"));
         chbArray.add((Preference) findPreference("chb2"));
         chbArray.add((Preference) findPreference("chb3"));
@@ -59,15 +73,14 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         chbArray.add((Preference) findPreference("chb6"));
         chbArray.add((Preference) findPreference("chb7"));
 
-                for (final Preference p:criteriesArray){
-                    p.setSummary(hashMap.get(prefs.getString(p.getKey(), "1")));
-
+        for (final Preference p:criteriesArray){
+            p.setSummary(hashMap.get(prefs.getString(p.getKey(), "1")));
         }
 
         initUsedCriteries();
         setEntriesForAll();
 
-
+        //устанавливает лисенеры на Критерии
         for (final Preference p:criteriesArray){
             p.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -82,15 +95,8 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         }
 
         setEnabled(Integer.parseInt(prefs.getString("sort_deep", "1")));
-        myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                setEnabled(Integer.parseInt(prefs.getString("sort_deep", "1")));
-                initUsedCriteries();
-                return true;
-            }
-        });
 
+        //по смене значения "Вложенности сортировки" меняет ListPrefernces'ы на Enabled или Disabled
         myPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -104,9 +110,8 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         });
     }
 
-
+    //устанавливает Enabled для тех ListPreference, которые меньше установленной пользователем sortDeep - вложенности сортировки
     private static void setEnabled(int sortDeep){
-
         for(int i=0;i<7;i++){
             if(i<sortDeep) {
                 criteriesArray.get(i).setEnabled(true);
@@ -122,6 +127,7 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         }
     }
 
+    //устанавливает в usedCriteries использованные Критерии
     private static void initUsedCriteries(){
         usedCriteries.clear();
         for (final Preference p : criteriesArray) {
@@ -132,6 +138,7 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         return;
     }
 
+    //возращает ещё не использованные Критерии на русском языке (не названия методов)
     private static ArrayList<String> getNotUsedForHuman(){
         ArrayList<String> notUsed=new ArrayList<>();
         notUsed.add("getName");
@@ -150,6 +157,8 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
 
         return notUsed;
     }
+
+    //возвращает НЕ использованные Критерии
     private static ArrayList<String> getNotUsed(){
         ArrayList<String> notUsed=new ArrayList<>();
         notUsed.add("getName");
@@ -160,11 +169,14 @@ public class SortSettings extends android.support.v4.preference.PreferenceFragme
         notUsed.add("getEmail");
         notUsed.add("getAddress");
 
-
         for (String s:usedCriteries)
             notUsed.remove(s);
+
         return notUsed;
     }
+
+    //устанавливает в ListPreference список показанных пользователю вариантов выбора Критериев
+    //в этот список не включаются те Критерии, которые уже были использованы на других Уровнях
     private static void setEntriesForAll(){
         for (Preference p:criteriesArray){
             ListPreference lP=(ListPreference) p;
