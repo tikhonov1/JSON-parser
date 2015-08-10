@@ -46,7 +46,7 @@ public class MainActivity extends SherlockFragmentActivity {
         menu.setMenu(R.layout.sidemenu);
         menu.setBehindWidthRes(R.dimen.slidingmenu_behind_width);
 
-        //при запуске программы устанавливает фрейм на
+        //при запуске программы устанавливает фрейм на BlankFragment, в котором RecyclerView
         if(isFirst)
             showFragment(new BlankFragment());
 
