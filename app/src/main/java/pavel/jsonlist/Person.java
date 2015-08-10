@@ -1,10 +1,8 @@
 package pavel.jsonlist;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
-//
+//класс, в котором хранятся данные для каждой Персоны
 public class Person {
     private String _id;
     private boolean isActive;
