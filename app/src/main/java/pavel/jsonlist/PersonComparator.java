@@ -88,24 +88,7 @@ class PersonComparator implements Comparator<Person> {
     }
 
     //возвращает результат сравнения для Boolean, Integer или String
-    private static <T> int compareTo(T a,T b) throws Exception{
-        if(a instanceof Integer){
-            Integer aI=(Integer) a;
-            Integer bI=(Integer) b;
-            return aI.compareTo(bI);
-        }
-        else if(a instanceof Boolean){
-            Boolean aB=(Boolean) a;
-            Boolean bB=(Boolean) b;
-            return aB.compareTo(bB);
-        }
-        else if(a instanceof String){
-            String aS=(String) a;
-            String bS=(String) b;
-            return aS.compareTo(bS);
-        }
-        else{
-            throw new Exception();
-        }
+    private static <T extends Comparable<T>> int compareTo(T a, T b) throws Exception{
+        return a.compareTo(b);
     }
 }
